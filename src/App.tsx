@@ -28,6 +28,18 @@ function App(): JSX.Element {
     }
   }
 
+  function moveToTodo(id: string){
+
+    let foundItem = doneList.find(item => {
+      return (item.id == id)
+    })
+    if(foundItem){
+      setTodoList([...todoList, foundItem])
+      onDeleteDone(id)
+    }
+  }
+
+
   function onAdd(): void{
 
     let newID: string = String(todoList.length)
@@ -63,9 +75,9 @@ function onDeleteDone(id: string){
     <div>
       <AddTodoForm value = {inputValue} onAdd={onAdd} onChange={onInputChange}></AddTodoForm>
       <h1>TodoListe</h1>
-      <TodoList onDelete={onDeleteTodo} todoList={todoList} moveToDone={moveToDone}></TodoList>
+      <TodoList onDelete={onDeleteTodo} todoList={todoList} onClick={moveToDone}></TodoList>
       <h1>DoneListe</h1>
-      <TodoList onDelete={onDeleteDone} todoList={doneList} moveToDone={moveToDone}></TodoList>
+      <TodoList onDelete={onDeleteDone} todoList={doneList} onClick={moveToTodo}></TodoList>
     </div>
   )
 }
