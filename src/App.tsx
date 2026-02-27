@@ -23,6 +23,7 @@ function App(): JSX.Element {
       return (item.id == id)
     })
     if(foundItem){
+      foundItem.completed = true
       setDoneList([...doneList, foundItem])
       onDeleteTodo(id)
     }
@@ -34,6 +35,7 @@ function App(): JSX.Element {
       return (item.id == id)
     })
     if(foundItem){
+      foundItem.completed = false
       setTodoList([...todoList, foundItem])
       onDeleteDone(id)
     }
@@ -48,7 +50,7 @@ function App(): JSX.Element {
     const newItem: Todo = {
       id: newID,
       title: inputValue,
-      completed: true
+      completed: false,
     }
     setInputValue("")
     setTodoList ([...todoList, newItem])

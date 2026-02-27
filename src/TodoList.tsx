@@ -18,8 +18,8 @@ export function TodoList(probs: TodoListProbs){
             <div className="todo-title">{item.title}</div>
             {/*<div>{item.completed}</div>*/}
             <button onClick={()=>probs.onDelete(item.id)}>Delete</button>
-            <div className="todo-title">Finished</div>
-            <input type="checkbox" name="completedBox" onClick={()=>probs.onClick(item.id)}/>
+            <div className="todo-title">completed</div>
+            <input checked = {item.completed} type="checkbox" name="completedBox" onClick={()=>probs.onClick(item.id)}/>
             </div>)
             
         })}
