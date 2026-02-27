@@ -15,6 +15,18 @@ function App(): JSX.Element {
   }
 
   const [todoList, setTodoList] = useState<Todo[]>([]);
+  const [doneList, setDoneList] = useState<Todo[]>([]);
+
+  function moveToDone(id: string){
+
+    let foundItem = todoList.find(item => {
+      return (item.id == id)
+    })
+    if(foundItem){
+      setDoneList([...doneList, foundItem])
+      onDeleteTodo(id)
+    }
+  }
 
   function onAdd(): void{
 
@@ -30,7 +42,7 @@ function App(): JSX.Element {
     setTodoList ([...todoList, newItem])
 
   }
-  function onDelete(id: string){
+  function onDeleteTodo(id: string){
 
     let newList: Todo [] = todoList.filter(item => {
       return (item.id != id)
@@ -38,10 +50,22 @@ function App(): JSX.Element {
     setTodoList(newList)
   }
 
+function onDeleteDone(id: string){
+
+    let newList: Todo [] = doneList.filter(item => {
+      return (item.id != id)
+    })
+    setDoneList(newList)
+  }
+
+
   return (
     <div>
       <AddTodoForm value = {inputValue} onAdd={onAdd} onChange={onInputChange}></AddTodoForm>
-      <TodoList onDelete={onDelete} todoList={todoList}></TodoList>
+      <h1>TodoListe</h1>
+      <TodoList onDelete={onDeleteTodo} todoList={todoList} moveToDone={moveToDone}></TodoList>
+      <h1>DoneListe</h1>
+      <TodoList onDelete={onDeleteDone} todoList={doneList} moveToDone={moveToDone}></TodoList>
     </div>
   )
 }
