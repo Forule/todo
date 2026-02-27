@@ -2,6 +2,7 @@ import type { Todo } from "./types/todo"
 import { useState, type ChangeEvent, type JSX } from "react";
 import "./App.css"
 import { AddTodoForm } from "./AddTodoForm";
+import { TodoList } from "./TodoList";
 
 function App(): JSX.Element {
 
@@ -37,26 +38,10 @@ function App(): JSX.Element {
     setTodoList(newList)
   }
 
-
-
-  
-
   return (
     <div>
       <AddTodoForm value = {inputValue} onAdd={onAdd} onChange={onInputChange}></AddTodoForm>
-      <div className="todo-container"> 
-        {todoList.map(item => {
-          return(<div className="todo-item">
-            <div className="todo-id">{Number(item.id)+1}</div>
-            <div className="todo-title">{item.title}</div>
-            {/*<div>{item.completed}</div>*/}
-            <button onClick={()=>onDelete(item.id)}>Delete</button>
-            <div className="todo-title">Finished</div>
-            <input type="checkbox" name="completedBox" onClick={()=>onDelete(item.id)}/>
-            </div>)
-            
-        })}
-      </div>
+      <TodoList onDelete={onDelete} todoList={todoList}></TodoList>
     </div>
   )
 }
