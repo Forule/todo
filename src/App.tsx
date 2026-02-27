@@ -1,8 +1,9 @@
 import type { Todo } from "./types/todo"
-import { useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent, type JSX } from "react";
 import "./App.css"
+import { AddTodoForm } from "./AddTodoForm";
 
-function App() {
+function App(): JSX.Element {
 
   const [inputValue, setInputValue] = useState<string>(
     ""
@@ -14,7 +15,7 @@ function App() {
 
   const [todoList, setTodoList] = useState<Todo[]>([]);
 
-  function onAdd(){
+  function onAdd(): void{
 
     let newID: string = String(todoList.length)
     
@@ -34,7 +35,6 @@ function App() {
       return (item.id != id)
     })
     setTodoList(newList)
-
   }
 
 
@@ -43,10 +43,7 @@ function App() {
 
   return (
     <div>
-      <div>
-        <input type="text" name="todoInput" value={inputValue} onChange={onInputChange} id="" placeholder="New entry"/>
-        <button onClick={onAdd}>Add</button>
-      </div>
+      <AddTodoForm value = {inputValue} onAdd={onAdd} onChange={onInputChange}></AddTodoForm>
       <div className="todo-container"> 
         {todoList.map(item => {
           return(<div className="todo-item">
