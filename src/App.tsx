@@ -1,5 +1,5 @@
 import type { Todo } from "./types/todo"
-import { useState, type ChangeEvent, type JSX } from "react";
+import { useEffect, useState, type ChangeEvent, type JSX } from "react";
 import { AddTodoForm } from "./AddTodoForm";
 import { TodoList } from "./TodoList";
 import { addTodo, deleteDone, deleteTodo, getDones, getTodos, moveToDone, moveToTodo } from "./todoService";
@@ -72,7 +72,14 @@ function onDeleteDone(id: string){
     setDoneList(newDoneList)
 
   }
+  useEffect(()=>{
 
+    let newTodoList: Todo [] = getTodos()
+    setTodoList(newTodoList)
+    
+    let newDoneList: Todo [] = getDones()
+    setDoneList(newDoneList)
+  })
 
   return (
     <div className="flex flex-col gap-5 p-4">

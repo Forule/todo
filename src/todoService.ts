@@ -3,11 +3,14 @@ import type { Todo } from "./types/todo"
 let todoList: Todo [] = []
 let doneList: Todo [] = []
 
+loadState()
+
 export function addTodo(item: Todo){
 
     item.id = String (todoList.length)
     todoList.push(item)
 
+    saveState()
 
 }
 
@@ -31,6 +34,8 @@ export function deleteTodo(idTodo: string){
 
     todoList = newTodoList
 
+    saveState()
+
 }
 
 export function deleteDone(idDone: string){
@@ -40,6 +45,8 @@ export function deleteDone(idDone: string){
     })
 
     doneList = newDoneList
+
+    saveState()
 
 }
 
@@ -58,7 +65,7 @@ export function moveToTodo(idTodo: string){
         deleteDone(idTodo)
     }
 
-
+    saveState()
 
 }
 
@@ -76,6 +83,40 @@ export function moveToDone(idDone: string){
         doneList = [...doneList, foundDone]
         deleteTodo(idDone)
     }
+    saveState()
+
+}
+
+function loadState(){
+
+let rawTodoList: string | null = window.localStorage.getItem("todoList")
+
+let rawDoneList: string | null = window.localStorage.getItem("doneList")
+
+if(rawTodoList){
+
+    let newTodoList = JSON.parse(rawTodoList)
+
+    todoList = newTodoList
+
+}
+
+if(rawDoneList){
+
+    let newDoneList = JSON.parse(rawDoneList)
+
+    doneList = newDoneList
+
+}
+
+
+
+
+}
+
+
+function saveState(){
+
 
 
 }
