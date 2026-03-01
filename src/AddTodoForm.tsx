@@ -17,7 +17,7 @@ return <div><div className="flex gap-4 items-center">
               }
             }
         }/>
-        <button className="px-2 py-1 bg-sky-500 text-white hover:bg-sky-600" onClick={probs.onAdd}>Add</button>
+        <button className="px-2 py-1 bg-sky-500 text-white hover:bg-sky-600 rounded-lg" onClick={probs.onAdd}>Add</button>
       </div></div>
 
 }

@@ -85,11 +85,11 @@ function onDeleteDone(id: string){
     <div className="flex flex-col gap-5 p-4">
       <AddTodoForm value = {inputValue} onAdd={onAdd} onChange={onInputChange}></AddTodoForm>
       <div className="flex flex-row gap-100 p-5">
-        <div>
+        <div className="flex flex-col gap-5 p-4">
           <h1 className="text-lg font-bold">TodoListe</h1>
           <TodoList onDelete={onDeleteTodo} todoList={todoList} onClick={onMoveToDone}></TodoList>
         </div>
-        <div>
+        <div className="flex flex-col gap-5 p-4">
           <h1 className="text-lg font-bold">DoneListe</h1>
           <TodoList onDelete={onDeleteDone} todoList={doneList} onClick={onMoveToTodo}></TodoList>
         </div>
