@@ -8,9 +8,9 @@ interface AddTodoFromProbs{
 
 export function AddTodoForm(probs: AddTodoFromProbs){
 
-return <div><div>
-        <input type="text" name="todoInput" value={probs.value} onChange={probs.onChange} id="" placeholder="New entry"/>
-        <button onClick={probs.onAdd}>Add</button>
+return <div><div className="flex gap-4 items-center">
+        <input className="px-2 py-1 border border-gray-300 focus:outline-sky-500" type="text" name="todoInput" value={probs.value} onChange={probs.onChange} id="" placeholder="New entry"/>
+        <button className="px-2 py-1 bg-sky-500 text-white hover:bg-sky-600" onClick={probs.onAdd}>Add</button>
       </div></div>
 
 }

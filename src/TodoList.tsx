@@ -11,14 +11,14 @@ interface TodoListProbs{
 export function TodoList(probs: TodoListProbs){
 
     return(<div>
-        <div className="todo-container"> 
+        <div className="flex flex-col gap-3"> 
         {probs.todoList.map(item => {
-          return(<div className="todo-item">
-            <div className="todo-id">{Number(item.id)+1}</div>
-            <div className="todo-title">{item.title}</div>
+          return(<div className="flex gap-2 p-2 bg-gray-100 w-fit items-center">
+            <div className="font-semibold">{Number(item.id)+1}</div>
+            <div className="">{item.title}</div>
             {/*<div>{item.completed}</div>*/}
-            <button onClick={()=>probs.onDelete(item.id)}>Delete</button>
-            <div className="todo-title">completed</div>
+            <button className = "px-2 py-1 bg-sky-500 text-white hover:bg-sky-600" onClick={()=>probs.onDelete(item.id)}>Delete</button>
+            <div className="">completed</div>
             <input checked = {item.completed} type="checkbox" name="completedBox" onClick={()=>probs.onClick(item.id)}/>
             </div>)
             

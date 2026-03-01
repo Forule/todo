@@ -1,6 +1,5 @@
 import type { Todo } from "./types/todo"
 import { useState, type ChangeEvent, type JSX } from "react";
-import "./App.css"
 import { AddTodoForm } from "./AddTodoForm";
 import { TodoList } from "./TodoList";
 import { addTodo, deleteDone, deleteTodo, getDones, getTodos, moveToDone, moveToTodo } from "./todoService";
@@ -76,11 +75,11 @@ function onDeleteDone(id: string){
 
 
   return (
-    <div>
+    <div className="flex flex-col gap-5 p-4">
       <AddTodoForm value = {inputValue} onAdd={onAdd} onChange={onInputChange}></AddTodoForm>
-      <h1>TodoListe</h1>
+      <h1 className="text-lg font-bold">TodoListe</h1>
       <TodoList onDelete={onDeleteTodo} todoList={todoList} onClick={onMoveToDone}></TodoList>
-      <h1>DoneListe</h1>
+      <h1 className="text-lg font-bold">DoneListe</h1>
       <TodoList onDelete={onDeleteDone} todoList={doneList} onClick={onMoveToTodo}></TodoList>
     </div>
   )
