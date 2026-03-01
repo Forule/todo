@@ -18,7 +18,7 @@ export function TodoList(probs: TodoListProbs){
             {/*<div>{item.completed}</div>*/}
             <button className = "px-2 py-1 bg-sky-500 text-white hover:bg-sky-600 rounded-md" onClick={()=>probs.onDelete(item.id)}>Delete</button>
             <div className="">completed</div>
-            <input checked = {item.completed} type="checkbox" name="completedBox" onClick={()=>probs.onClick(item.id)}/>
+            <input checked = {item.completed} type="checkbox" name="completedBox" onChange={()=>probs.onClick(item.id)}/>
             </div>)
             
         })}
