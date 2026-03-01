@@ -64,6 +64,28 @@ function App(): JSX.Element {
     setTodoList(newList)
   
   }
+  
+const loadDataFromServer = async () => {
+
+  try {
+
+    const response = await fetch("http://localhost:3000/todos")
+
+  
+    const data: Todo[] = await response.json()
+
+    const todosOnly = data.filter(t => t.completed === false)
+    const donesOnly = data.filter(t => t.completed === true)
+
+    setTodoList(todosOnly)
+    setDoneList(donesOnly)
+  }catch (error) {
+
+    console.error("Server Fehler", error)
+
+  }
+
+}
 
 function onDeleteDone(id: string){
 
@@ -74,11 +96,7 @@ function onDeleteDone(id: string){
   }
   useEffect(()=>{
 
-    let newTodoList: Todo [] = getTodos()
-    setTodoList(newTodoList)
-
-    let newDoneList: Todo [] = getDones()
-    setDoneList(newDoneList)
+    loadDataFromServer()
   },[])
 
   return (
