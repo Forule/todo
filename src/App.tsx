@@ -3,6 +3,7 @@ import { useState, type ChangeEvent, type JSX } from "react";
 import "./App.css"
 import { AddTodoForm } from "./AddTodoForm";
 import { TodoList } from "./TodoList";
+import { addTodo, deleteDone, deleteTodo, getDones, getTodos, moveToDone, moveToTodo } from "./todoService";
 
 function App(): JSX.Element {
 
@@ -17,28 +18,25 @@ function App(): JSX.Element {
   const [todoList, setTodoList] = useState<Todo[]>([]);
   const [doneList, setDoneList] = useState<Todo[]>([]);
 
-  function moveToDone(id: string){
+  function onMoveToDone(id: string){
+    
+    moveToDone(id)
+    let newTodoList: Todo [] = getTodos()
+    setTodoList(newTodoList)
+    let newDoneList: Todo [] = getDones()
+    setDoneList(newDoneList)
 
-    let foundItem = todoList.find(item => {
-      return (item.id == id)
-    })
-    if(foundItem){
-      foundItem.completed = true
-      setDoneList([...doneList, foundItem])
-      onDeleteTodo(id)
-    }
+
   }
 
-  function moveToTodo(id: string){
+  function onMoveToTodo(id: string){
 
-    let foundItem = doneList.find(item => {
-      return (item.id == id)
-    })
-    if(foundItem){
-      foundItem.completed = false
-      setTodoList([...todoList, foundItem])
-      onDeleteDone(id)
-    }
+    moveToTodo(id)
+    let newTodoList: Todo [] = getTodos()
+    setTodoList(newTodoList)
+    let newDoneList: Todo [] = getDones()
+    setDoneList(newDoneList)
+
   }
 
 
@@ -53,23 +51,27 @@ function App(): JSX.Element {
       completed: false,
     }
     setInputValue("")
-    setTodoList ([...todoList, newItem])
+    addTodo(newItem)
+
+    let newTodoList: Todo [] = getTodos()
+    setTodoList(newTodoList)
+    
 
   }
   function onDeleteTodo(id: string){
-
-    let newList: Todo [] = todoList.filter(item => {
-      return (item.id != id)
-    })
+    
+    deleteTodo(id)
+    let newList: Todo [] = getTodos()
     setTodoList(newList)
+  
   }
 
 function onDeleteDone(id: string){
 
-    let newList: Todo [] = doneList.filter(item => {
-      return (item.id != id)
-    })
-    setDoneList(newList)
+    deleteDone(id)  
+    let newDoneList: Todo [] = getDones()
+    setDoneList(newDoneList)
+
   }
 
 
@@ -77,9 +79,9 @@ function onDeleteDone(id: string){
     <div>
       <AddTodoForm value = {inputValue} onAdd={onAdd} onChange={onInputChange}></AddTodoForm>
       <h1>TodoListe</h1>
-      <TodoList onDelete={onDeleteTodo} todoList={todoList} onClick={moveToDone}></TodoList>
+      <TodoList onDelete={onDeleteTodo} todoList={todoList} onClick={onMoveToDone}></TodoList>
       <h1>DoneListe</h1>
-      <TodoList onDelete={onDeleteDone} todoList={doneList} onClick={moveToTodo}></TodoList>
+      <TodoList onDelete={onDeleteDone} todoList={doneList} onClick={onMoveToTodo}></TodoList>
     </div>
   )
 }
