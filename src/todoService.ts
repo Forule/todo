@@ -7,7 +7,7 @@ loadState()
 
 export function addTodo(item: Todo){
 
-    item.id = String (todoList.length)
+    item.id = Date.now().toString()
     todoList.push(item)
 
     saveState()
