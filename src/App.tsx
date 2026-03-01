@@ -76,10 +76,10 @@ function onDeleteDone(id: string){
 
     let newTodoList: Todo [] = getTodos()
     setTodoList(newTodoList)
-    
+
     let newDoneList: Todo [] = getDones()
     setDoneList(newDoneList)
-  })
+  },[])
 
   return (
     <div className="flex flex-col gap-5 p-4">

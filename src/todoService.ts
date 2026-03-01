@@ -117,6 +117,11 @@ if(rawDoneList){
 
 function saveState(){
 
+    let todoSave = JSON.stringify(todoList)
+    let doneSave = JSON.stringify(doneList)
+
+    localStorage.setItem("todoList", todoSave)
+    localStorage.setItem("doneList", doneSave)
 
 
 }
