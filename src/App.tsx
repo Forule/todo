@@ -15,7 +15,7 @@ function App(): JSX.Element {
     try {
       const response = await fetch("http://localhost:3000/todos");
       const data: Todo[] = await response.json();
-
+      console.log("Das kommt vom Server an:", data[0]);
       setTodoList(data.filter(t => !t.completed));
       setDoneList(data.filter(t => t.completed));
     } catch (error) {
@@ -34,9 +34,8 @@ function App(): JSX.Element {
 
   // 3. Hinzufügen (Schon umgestellt)
   async function onAdd(): Promise<void> {
-    const newItem: Todo = {
-      id: Date.now().toString(), // Sicherere ID
-      title: inputValue,
+    const newItem: Omit<Todo, 'id'> = {
+      name: inputValue,
       completed: false,
     };
 
@@ -90,19 +89,55 @@ function App(): JSX.Element {
   }
 
   return (
-    <div className="flex flex-col gap-5 p-4">
-      <AddTodoForm value={inputValue} onAdd={onAdd} onChange={onInputChange} />
-      <div className="flex flex-row gap-100 p-5">
-        <div className="flex flex-col gap-5 p-4">
-          <h1 className="text-lg font-bold">TodoListe</h1>
-          <TodoList onDelete={onDeleteTodo} todoList={todoList} onClick={onToggleTodo} />
+    <div className="min-h-screen bg-slate-50 p-4 md:p-12 font-sans text-slate-900">
+    <div className="max-w-5xl mx-auto">
+      
+      {/* Header & Input Sektion */}
+      <header className="mb-12 text-center">
+        <h1 className="text-4xl font-black tracking-tight text-slate-900 mb-8">
+          EZ<span className="text-sky-600">Todo</span>
+        </h1>
+        <div className="flex justify-center">
+          <AddTodoForm value={inputValue} onAdd={onAdd} onChange={onInputChange} />
         </div>
-        <div className="flex flex-col gap-5 p-4">
-          <h1 className="text-lg font-bold">DoneListe</h1>
-          <TodoList onDelete={onDeleteTodo} todoList={doneList} onClick={onToggleTodo} />
-        </div>
+      </header>
+
+      {/* Spalten-Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        
+        {/* Spalte: Offene Aufgaben */}
+        <section className="space-y-6">
+          <div className="flex items-center justify-between px-2">
+            <h2 className="text-xl font-bold flex items-center gap-2">
+              Zu erledigen
+              <span className="text-sm font-medium bg-sky-100 text-sky-700 px-2.5 py-0.5 rounded-full">
+                {todoList.length}
+              </span>
+            </h2>
+          </div>
+          <div className="bg-white/40 backdrop-blur-sm p-2 rounded-3xl border border-slate-200/60 shadow-inner">
+            <TodoList onDelete={onDeleteTodo} todoList={todoList} onClick={onToggleTodo} />
+          </div>
+        </section>
+
+        {/* Spalte: Erledigte Aufgaben */}
+        <section className="space-y-6 opacity-80 lg:opacity-100 transition-opacity hover:opacity-100">
+          <div className="flex items-center justify-between px-2">
+            <h2 className="text-xl font-bold text-slate-500 flex items-center gap-2">
+              Erledigt
+              <span className="text-sm font-medium bg-slate-200 text-slate-600 px-2.5 py-0.5 rounded-full">
+                {doneList.length}
+              </span>
+            </h2>
+          </div>
+          <div className="bg-slate-200/30 p-2 rounded-3xl border border-dashed border-slate-300">
+            <TodoList onDelete={onDeleteTodo} todoList={doneList} onClick={onToggleTodo} />
+          </div>
+        </section>
+
       </div>
     </div>
+  </div>
   );
 }
 
