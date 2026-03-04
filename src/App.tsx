@@ -95,7 +95,7 @@ function App(): JSX.Element {
       {/* Header & Input Sektion */}
       <header className="mb-12 text-center">
         <h1 className="text-4xl font-black tracking-tight text-slate-900 mb-8">
-          EZ<span className="text-sky-600">Todo</span>
+          simple<span className="text-sky-600">Todo</span>
         </h1>
         <div className="flex justify-center">
           <AddTodoForm value={inputValue} onAdd={onAdd} onChange={onInputChange} />
