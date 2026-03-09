@@ -36,10 +36,22 @@ function App(): JSX.Element {
     }
   };
 
+  const handleLogout = () => {
+
+    localStorage.removeItem("todo-token")
+
+    setIsLoggedIn(false)
+
+    setTodoList([])
+    setDoneList([])
+
+  }
+
   // 2. Effekt beim Start
   useEffect(() => {
-    loadDataFromServer();
-  }, []);
+    if(isLoggedIN){loadDataFromServer();}
+    
+  }, [isLoggedIN]);
 
   function onInputChange(event: ChangeEvent<HTMLInputElement>) {
     setInputValue(event.target.value);
@@ -111,6 +123,12 @@ function App(): JSX.Element {
 
   return (
     <div className="min-h-screen bg-slate-50 p-4 md:p-12 font-sans text-slate-900">
+      <button 
+      onClick={handleLogout}
+      className="absolute top-6 right-6 px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl text-sm font-bold shadow-sm hover:bg-red-50 hover:text-red-600 hover:border-red-100 transition-all active:scale-95"
+    >
+      Abmelden
+    </button>
     <div className="max-w-5xl mx-auto">
       
       {/* Header & Input Sektion */}
