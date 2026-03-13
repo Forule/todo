@@ -19,7 +19,7 @@ function App(): JSX.Element {
   
 
     try {
-      const response = await fetch("${API_URL}/todos", {
+      const response = await fetch(`${API_URL}/todos`, {
       headers: {
           "Authorization": `Bearer ${token}`
         }
@@ -67,7 +67,7 @@ function App(): JSX.Element {
     const token = localStorage.getItem("todo-token");
 
     try {
-      const response = await fetch("${API_URL}/todos", {
+      const response = await fetch(`${API_URL}/todos`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
         body: JSON.stringify(newItem),
