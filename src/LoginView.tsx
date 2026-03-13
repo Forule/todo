@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 interface LoginViewProbs {
     onLoginSuccess: () => void;
 }
@@ -20,7 +22,7 @@ export function LoginView ({onLoginSuccess}: LoginViewProbs) {
         
         try {
 
-            const response = await fetch(`http://localhost:3000/${endpoint}`, {
+            const response = await fetch(`${API_URL}/${endpoint}`, {
 
                 method: "POST",
                 headers: {"Content-Type": "application/json"},

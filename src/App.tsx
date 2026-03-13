@@ -4,7 +4,7 @@ import { AddTodoForm } from "./AddTodoForm";
 import { TodoList } from "./TodoList";
 import { LoginView } from "./LoginView";
 
-// Der todoService Import ist weg!
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 function App(): JSX.Element {
   const [inputValue, setInputValue] = useState<string>("");
@@ -19,7 +19,7 @@ function App(): JSX.Element {
   
 
     try {
-      const response = await fetch("http://localhost:3000/todos", {
+      const response = await fetch("${API_URL}/todos", {
       headers: {
           "Authorization": `Bearer ${token}`
         }
@@ -67,7 +67,7 @@ function App(): JSX.Element {
     const token = localStorage.getItem("todo-token");
 
     try {
-      const response = await fetch("http://localhost:3000/todos", {
+      const response = await fetch("${API_URL}/todos", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
         body: JSON.stringify(newItem),
@@ -86,7 +86,7 @@ function App(): JSX.Element {
   async function onDeleteTodo(id: string) {
     const token = localStorage.getItem("todo-token");
     try {
-      const response = await fetch (`http://localhost:3000/todos/${id}`, { method: "DELETE", headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }})
+      const response = await fetch (`${API_URL}/todos/${id}`, { method: "DELETE", headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }})
 
       if (response.ok) {
         await loadDataFromServer()
@@ -101,7 +101,7 @@ function App(): JSX.Element {
 
     try{
 
-      const response = await fetch(`http://localhost:3000/todos/${id}`, {
+      const response = await fetch(`${API_URL}/todos/${id}`, {
         method: "PATCH", headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }
       })
       if(response.ok){
