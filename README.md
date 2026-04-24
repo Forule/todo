@@ -1,5 +1,7 @@
 # 📝 simpleTodo
 
+[![Live API](https://img.shields.io/badge/status-online-green.svg?style=for-the-badge)](DEIN_LIVE_LINK_HIER)
+
 ## Table of contents
 * [Introduction](#introduction)
 * [Deployment](#deployment)
