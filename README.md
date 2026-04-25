@@ -1,38 +1,56 @@
-# 📝 simpleTodo
+# 📝 simpleTodo — Frontend
 
-[![Live API](https://img.shields.io/badge/status-online-green.svg?style=for-the-badge)](https://todo.janmuljowin.de/)
+[![Live](https://img.shields.io/badge/status-online-green.svg?style=for-the-badge)](https://todo.janmuljowin.de)
+[![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 
-## Table of contents
-* [Introduction](#introduction)
-* [Deployment](#deployment)
-* [Architecture](#architecture)
-* [License](#license)
-* [Forbidden](#forbidden)
+The browser-based client of **simpleTodo** — a lightweight, type-safe task management app with user authentication, personal task lists, and a clean responsive UI.
+
+> 🔗 **Live:** [todo.janmuljowin.de](https://todo.janmuljowin.de) — Backend repo: [todo-backend](https://github.com/Forule/todo-backend)
 
 ---
 
-## Introduction
-This is the browser-based frontend of **simpleTodo**, a lightweight, type-safe, and high-performance application for managing daily tasks. It allows users to create, update, and track their to-dos in real-time with a focus on intuitive UX and robust engineering.
+## Table of Contents
 
-## Deployment
-The frontend client is containerized and ready for modern cloud environments.
-* **Containerization:** The project includes a `Dockerfile`, allowing it to be easily built and deployed as a Docker container across any environment supporting OCI containers.
-* **Environment:** Alternatively, it can be served by standard web servers or static hosting platforms.
-* **API Configuration:** The application connects to a REST API. Ensure the API endpoint is correctly configured in the environment variables or settings before building the container/deploying.
+- [Features](#features)
+- [Architecture](#architecture)
+- [Deployment](#deployment)
+- [License](#license)
+
+---
+
+## Features
+
+- **User Authentication** — Register and log in with a personal account; protected routes ensure unauthenticated users are redirected to login
+- **Personal Task Management** — Each user sees only their own tasks, persisted in a PostgreSQL database via the backend API
+- **Responsive UI** — Built with Tailwind CSS for a consistent, mobile-friendly design across all screen sizes
+- **Type-Safe** — Fully written in TypeScript for reliable, maintainable code
+- **Containerized** — Docker-ready for straightforward deployment
+
+---
 
 ## Architecture
-**simpleTodo** is a modular frontend application built with modern engineering standards. The following structure describes the core architecture:
 
-The application consists of three major components:
-1.  **Type-Safe Logic & State:** The core application is written in **TypeScript**. This ensures type safety, better developer tooling, and fewer runtime errors. It handles local state, DOM manipulation, and user interactions cleanly and efficiently.
-2.  **Static UI Layer:** Built with semantic HTML5 and styled using **Tailwind CSS**. This utility-first framework ensures a highly responsive, consistent, and maintainable design across all device types without bloating CSS files.
-3.  **API Integration Layer:** Uses the Fetch API to communicate with a RESTful backend. It handles asynchronous requests for CRUD operations and manages data synchronization.
+1. **React (Component-Based UI)** — The interface is built as a React application using functional components and hooks for state and side-effect management.
+2. **TypeScript** — Strict typing across all components and API calls reduces runtime errors and improves developer tooling.
+3. **Protected Routing** — Authenticated routes redirect unauthenticated users automatically; auth state is managed globally.
+4. **API Integration** — Communicates with the REST backend via the Fetch API for all CRUD operations on tasks and user sessions.
+5. **Tailwind CSS** — Utility-first styling for a responsive, maintainable UI without custom CSS bloat.
+6. **Vite** — Fast build tooling and hot module replacement during development.
 
-Required dynamic data is fetched from the backend API, while local persistence is optionally handled via the **Web Storage API (LocalStorage)** to ensure a seamless user experience even during network interruptions.
+---
+
+## Deployment
+
+- **Containerization** — The included `Dockerfile` builds and serves the application as an OCI-compliant container.
+- **CI/CD** — Automated build and push to GHCR via GitHub Actions on every merge to `main`.
+- **API Configuration** — The backend endpoint is configured via environment variables before building.
+
+---
 
 ## License
-Copyright (c) 2026 Jan Muljowin 
-This project is licensed under the **MIT License**.
 
-## Forbidden
-**Hold Liable:** The software is provided "as is", without warranty of any kind. The software author or license owner cannot be held liable for any damages or issues arising from the use of this software.
+Copyright (c) 2026 Jan Muljowin — MIT License.
